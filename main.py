@@ -1,22 +1,24 @@
-from calc.models import CalcSymbol
+from calc.data.data import calcCommands, commandsEnum
+from calc.models import Command
 
-a = CalcSymbol('Test')
+# a = CalcSymbol('Test')
 
-print(a.name)
+# value1 = float(input('Введите значение a'))
+# value2 = float(input('Введите значение b'))
 
-# class TestClass:
-#     name = 'test class'
+# print(Command(accumulate).execute(value1, value2))
 #
-#     def __test(self):
-#         return str(self)
-#     def test(self):
-#         return str(self)
-#     def __str__(self):
-#         return f'{self.name}'
-#
-# # print(TestClass().__test())
-#
-# def testTypo(testString: TestClass, text='test text') -> str:
-#     return f'{testString} + {text}'
-#
-# print(testTypo(TestClass()))
+# print(Command(subtraction).execute(value1, value2))
+
+class Calculator:
+    __commands = calcCommands
+
+    def calc(self, command: commandsEnum):
+        commandData = self.__commands[command]
+        print(commandData)
+        return commandData['command']
+
+
+calculator = Calculator()
+res = calculator.calc(commandsEnum['plus'])(4, 10)
+print(res)
